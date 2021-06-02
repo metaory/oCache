@@ -1,0 +1,12 @@
+{
+  "name": "ocache",
+  "description": "oCache CaaS",
+  "license": "MIT",
+  "version": "0.0.2",
+  "author": "metaory <metaory@gmail.com>",
+  "repository": "git@github.com:metaory/ocache.git",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "serverless-openapi-joi": "^0.2.7"
+  }
+}
