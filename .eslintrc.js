@@ -18,5 +18,7 @@ module.exports = {
     'brace-style': 0,
     'no-trailing-spaces': 0,
     'no-warning-comments': 0,
+    'camelcase': [1, {ignoreDestructuring: true}],
+    'prefer-destructuring': 0,
   }
 }
