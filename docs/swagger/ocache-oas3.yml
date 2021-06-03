@@ -533,7 +533,7 @@ paths:
                         url: 'http://marvel.com/comics/characters/1011346/ben_reilly?utm_campaign=apiRef&utm_source=a61a217e2a30f91fedb7e08ab529144f'
     parameters:
       - schema:
-          type: number
+          type: integer
           format: none
           example: 1017100
         name: character_id
