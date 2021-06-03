@@ -6,7 +6,7 @@ info:
   version: '2021-06-01 20:25:40UTC'
   description: Dummy OAS
   license:
-    url: 'https://github.com/metaory/oCache/blob/master/LICENSE'
+    url: 'https://github.com/metaory/ocache/blob/master/LICENSE'
     name: MIT
 servers:
   - url: 'https://ndabajxbh7.execute-api.ap-southeast-1.amazonaws.com'
