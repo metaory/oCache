@@ -534,8 +534,8 @@ paths:
     parameters:
       - schema:
           type: number
-          default: 1017100
           format: none
+          example: 1017100
         name: character_id
         in: path
         required: true
