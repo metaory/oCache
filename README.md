@@ -29,7 +29,7 @@ import { setupCache } from 'axios-xencache-adapter'
 // Create `axios-cache-adapter` instance
 const cache = setupCache({
   store: 'memory', // s3, redis, memory
-  xenKey: 'your Xencache API key',
+  // xenKey: 'your Xencache API key',
   maxAge: 15 * 60 * 1000
 })
 
