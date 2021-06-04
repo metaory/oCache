@@ -1,0 +1,111 @@
+service: xencache-service
+org: metaory
+frameworkVersion: '2'
+
+custom:
+  bucket: xencache
+  secret: ${file(./secret.yml)}
+  serverless-offline:
+    httpPort: 4000
+    stageVariables:
+      foo: "bar"
+plugins:
+  # XXX Local dev 
+  - serverless-offline
+
+  # TODO joi
+  # - serverless-openapi-joi
+
+
+provider:
+  name: aws
+  stage: dev
+  runtime: nodejs14.x
+  region: ap-southeast-1
+  lambdaHashingVersion: 20201221
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:GetObject
+            - s3:GetObjectAcl
+            - s3:PutObject
+            - s3:PutObjectAcl
+            # - s3:ListBucketVersions # XXX 
+          Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+  environment:
+    CACHE_BUCKET: ${self:custom.bucket}
+    DS_MARVEL_PUB: ${self:custom.secret.marvel_pub}
+    DS_MARVEL_PRI: ${self:custom.secret.marvel_pri}
+    DS_MARVEL_MAX_LIMIT: 100
+  logs:
+    httpApi: true
+  httpApi:
+    cors:
+      allowedOrigins:
+        - https://metaory.github.io
+        - http://localhost:8080
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+      allowCredentials: true
+      exposedResponseHeaders:
+        - Special-Response-Header
+      maxAge: 6000
+    metrics: true
+
+# package:
+#   exclude:
+#     - swagger/**
+#     - docs-src/**
+#     - docs/**
+    # - .tmp/**
+  # individually: true
+
+functions:
+  character-list:
+    handler: src/handler/marvel.findCharacters
+    maximumRetryAttempts: 1
+    timeout: 180
+    events:
+     - httpApi:
+        method: get
+        path: /characters
+
+  character-detail:
+    handler: src/handler/marvel.getCharacterById
+    maximumRetryAttempts: 1
+    events:
+     - httpApi:
+        method: get
+        path: /characters/{character_id}
+
+  # // XXX INVALIDATE
+  # POST /reload/{datasource}/{resource}
+
+resources:
+  Resources:
+    OCacheBucket:
+      Type: AWS::S3::Bucket
+      DeletionPolicy: Delete
+      Properties:
+        BucketName: ${self:custom.bucket}
+        AccessControl: Private
+        LifecycleConfiguration:
+          Rules:
+            - Prefix: marvel/
+              Status: Enabled
+              ExpirationInDays: 1
+        CorsConfiguration:
+          CorsRules:
+            - AllowedMethods:
+                - GET
+              AllowedOrigins:
+                - https://metaory.github.io
+                - http://localhost:8080
+              AllowedHeaders:
+                - "*"
+

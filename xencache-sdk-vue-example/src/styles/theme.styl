@@ -1,0 +1,23 @@
+@import "~@style"
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  display: block
+  background: getVar(theme-layout)
+}
+*::-webkit-scrollbar-thumb {
+  background: getVar(theme-color)
+  border-radius: 5px;
+}
+
+::selection
+  background: alpha($vue-ui-color-dark, .15)
+
+html,
+body,
+#app
+  height 100%
+
+
+
