@@ -28,7 +28,8 @@ import { setupCache } from 'axios-xencache-adapter'
 
 // Create `axios-cache-adapter` instance
 const cache = setupCache({
-  xencacheApiKey: 'your Xencache API key',
+  store: 'memory', // s3, redis, memory
+  xenKey: 'your Xencache API key',
   maxAge: 15 * 60 * 1000
 })
 
@@ -91,23 +92,6 @@ app
 middleware options // TODO
 
 ***
-
-### Easily configure and provide any Unreliable / Limited API `Reliabaly` AND `Fast` for pennies!
-
-Setup
------
-    yarn install
-    `yarn run deploy` or `sls deploy`
-   
-Local Development
------------------
-    yarn install
-   
-`sls offline` or `npm start`
-
-Tests
------
-- [ ] *not implemented* 
 
 xencache-sdk-js Examples
 ========================
