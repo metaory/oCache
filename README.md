@@ -10,9 +10,9 @@ xencache
 
 ***
 
-# axios-xencache-plugin
+# axios-xencache-adapter
 
-Axios xencache plugin, effortlessly cache expensive, non-critical API calls
+Axios xencache adapter, effortlessly cache expensive, non-critical API calls
 
 ## Installation
 
