@@ -379,6 +379,8 @@ paths:
                       required:
                         - type
                         - url
+                  '':
+                    type: string
                 required:
                   - id
                   - name
@@ -534,12 +536,11 @@ paths:
     parameters:
       - schema:
           type: integer
-          format: none
-          example: 1017100
+          example: 1011346
         name: character_id
         in: path
         required: true
         description: ID of character that needs to be fetched
-        style: label
 security: []
+
 
